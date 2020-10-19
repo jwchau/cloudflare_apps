@@ -23,7 +23,7 @@ async function handleRequest(req) {
     r.get('/links', req => handler(req))
 
     r.get('/', () => new Response('Hello worker!')) // return a default message for the root route
-    // r.get('/', () => new Response('Hello worker!')) // return static html page on root
+    // r.get('/html', () => new Response()) // return static html page on root
 
     const resp = await r.route(req)
     return resp
