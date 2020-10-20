@@ -28,6 +28,13 @@ class LinksTransformer {
     }
   }
 
+const urlRewriter = {
+    element: (element) => {
+        element.setAttribute('href', 'https://workers.cloudflare.com')
+        element.setInnerContent('Return to Cloudflare Workers')
+    },
+}  
+
 async function handleRequest(req) {
     const url = req.url
     console.log(url)
@@ -50,7 +57,9 @@ async function handleRequest(req) {
         }
     }))
 
+    const rewriter = new HTMLRewriter()
+        .on('#link_1', urlRewriter)
 
     const resp = await r.route(req)
-    return resp
+    return rewriter.transform(resp)
 }
