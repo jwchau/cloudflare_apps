@@ -38,7 +38,6 @@ async function handleRequest(req) {
     r.get('/', () => fetch('https://static-links-page.signalnerve.workers.dev'))
 
 
-
     console.log('request finish')
     const resp = await r.route(req)
     return resp
