@@ -1,3 +1,4 @@
+const html = `
 <!doctype html>
 <html>
     <head>
@@ -36,5 +37,15 @@
             <h2>Hello World! Welcome to your Workers Site.</h2>
             <img id="ferris" alt="a happy crab is wearing a cowboy hat and holding a lasso. 200 success." src="./img/200-wrangler-ferris.gif">
         </div>
+
+        <div id="links">
+            <a href="#link1">A sample URL</a>
+            <a href="https://anothersampleurl.com">Another sample URL</a>
+            <a href="https://afinalsampleurl.com">A final sample URL</a>
+        </div>
     </body>
 </html>
+`
+
+module.exports = html
+
