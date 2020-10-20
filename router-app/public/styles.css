@@ -1,0 +1,33 @@
+h1 {
+    font-family: Pacifico, sans-serif;
+    font-size: 4em;
+    color: #3eb5f1;
+    margin: 0;
+}
+
+h2 {
+    font-weight: 300;
+    font-family: sans-serif;
+}
+
+.centered {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#ferris {
+    width: 75%;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.center-center {
+    justify-content: center;
+    align-items: center;
+}
