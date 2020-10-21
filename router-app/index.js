@@ -82,7 +82,7 @@ class rewriteBackground {
     }
 
     element(element) {
-        element.setAttribute('class', 'bg-yellow-500')
+        element.setAttribute('class', 'bg-yellow-600')
     }
 }
 
