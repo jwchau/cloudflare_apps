@@ -30,7 +30,7 @@ class linksInserter {
                         <img src='${this.urls[i].svg}'/>
                     </a>`,{ html: true }
                 )
-            } else element.append(`<a href="${this.urls[i].url}">${this.urls[i].name}</a>`, { html: true })
+            } else element.append(`<a target='_blank' href="${this.urls[i].url}">${this.urls[i].name}</a>`, { html: true })
         }
     }
 }
