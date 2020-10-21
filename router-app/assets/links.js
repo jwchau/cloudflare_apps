@@ -21,21 +21,36 @@ class Link {
   }
 }
 
-// seeds
-const names = [
+// social seed
+let names = [
   'Worker',
   'LinkedIn',
   'Personal Site',
   'Github',
 ]
-
-const urls = [
+let urls = [
   'https://links-app.jwchau.workers.dev/',
   'https://linkedin.com/in/jwchau',
   'https://john-chau.com',
   'https://github.com/jwchau',
 ]
+const socials = Link.zip(names, urls)
 
-const links = Link.zip(names, urls)
 
-module.exports = links
+// sample seed
+names = [
+  'A sample URL',
+  'Another sample URL',
+  'A final sample URL',
+]
+urls = [
+  'https://asampleurl.com',
+  'https://anothersampleurl.com',
+  'https://afinalsampleurl.com',
+]
+const samples = Link.zip(names, urls)
+
+module.exports = {
+  socials,
+  samples,
+}

@@ -1,5 +1,5 @@
 const Router = require('./router')
-const links = require('./assets/links')
+const {links, samples} = require('./assets/links')
 
 /**
  * Example of how router can be used in an application
@@ -18,13 +18,12 @@ function handler(req) {
 
 class LinksTransformer {
     constructor(links) {
-        this.links = links
+        this.urls = links
     }
 
     async element(element) {
-        for (let i = 0; i < links.length; i++) {
-            console.log('count me:', i)
-            element.append(`<a href="${links[i].url}">${links[i].name}</a>`, { html: true })
+        for (let i = 0; i < this.urls.length; i++) {
+            element.append(`<a href="${this.urls[i].url}">${this.urls[i].name}</a>`, { html: true })
         }
     }
 }
@@ -50,7 +49,7 @@ async function handleRequest(req) {
     r.get('/', () => fetch('https://static-links-page.signalnerve.workers.dev'))
 
     const rewriter = new HTMLRewriter()
-        .on('div#links', new LinksTransformer(links))
+        .on('div#links', new LinksTransformer(samples))
         // .on('img', imageRewriter)
 
     const resp = await r.route(req)
