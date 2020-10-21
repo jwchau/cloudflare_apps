@@ -12,7 +12,7 @@ function handler(req) {
     const init = {
         headers: { 'content-type': 'application/json' },
     }
-    const body = JSON.stringify(links)
+    const body = JSON.stringify(socials.concat(samples))
     return new Response(body, init)
 }
 
