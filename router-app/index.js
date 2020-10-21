@@ -23,7 +23,14 @@ class linksInserter {
 
     async element(element) {
         for (let i = 0; i < this.urls.length; i++) {
-            element.append(`<a href="${this.urls[i].url}">${this.urls[i].name}</a>`, { html: true })
+            if (this.urls[i].svg) {
+                element.append(
+                    `<a href="${this.urls[i].url}">
+                        ${this.urls[i].name}
+                        ${this.urls[i].svg}/>
+                    </a>`,{ html: true }
+                )
+            } else element.append(`<a href="${this.urls[i].url}">${this.urls[i].name}</a>`, { html: true })
         }
     }
 }

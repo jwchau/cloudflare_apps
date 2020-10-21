@@ -28,11 +28,8 @@ let urls = [
   'https://john-chau.com',
   'https://github.com/jwchau',
 ]
-let svgs = [
-  './assets/icons/cloudflare.svg',
-  './assets/icons/linkedin.svg',
-  './assets/icons/smile.svg',
-  './assets/icons/github.svg',
+const svgs = [
+
 ]
 const socials = Objectify(names, urls, svgs)
 
