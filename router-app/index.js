@@ -25,9 +25,9 @@ class linksInserter {
         for (let i = 0; i < this.urls.length; i++) {
             if (this.urls[i].svg) {
                 element.append(
-                    `<a href="${this.urls[i].url}">
+                    `<a target='_blank' href="${this.urls[i].url}">
                         ${this.urls[i].name}
-                        ${this.urls[i].svg}/>
+                        <img src='${this.urls[i].svg}'/>
                     </a>`,{ html: true }
                 )
             } else element.append(`<a href="${this.urls[i].url}">${this.urls[i].name}</a>`, { html: true })
@@ -76,6 +76,16 @@ class removeStyle {
     }
 }
 
+class rewriteBackground {
+    constructor(color) {
+        this.color = color
+    }
+
+    element(element) {
+        element.setAttribute('class', 'bg-yellow-500')
+    }
+}
+
 // #FEFCBF, #FAF089
 
 async function handleRequest(req) {
@@ -92,9 +102,7 @@ async function handleRequest(req) {
         .on('h1#name', new h1Rewriter('John Chau'))
         .on('div#social', new removeStyle())
         .on('div#social', new linksInserter(socials))
-        
-        // .on('div#profile', new imageInserter('./assets/img/face.png', 'Me'))
-        
+        .on('body', new rewriteBackground('#FEFCBF'))
 
     const resp = await r.route(req)
     return rewriter.transform(resp)

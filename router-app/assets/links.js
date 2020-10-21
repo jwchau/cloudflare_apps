@@ -22,15 +22,21 @@ let names = [
   'Personal Site',
   'Github',
 ]
+
 let urls = [
   'https://links-app.jwchau.workers.dev/',
   'https://linkedin.com/in/jwchau',
   'https://john-chau.com',
   'https://github.com/jwchau',
 ]
-const svgs = [
 
+const svgs = [
+  'https://raw.githubusercontent.com/jwchau/jwchau.github.io/23270ab1c2c916ad0563c9b5fc94260021acee7d/images/cloudflare.svg',
+  'https://raw.githubusercontent.com/jwchau/jwchau.github.io/23270ab1c2c916ad0563c9b5fc94260021acee7d/images/linkedin.svg',
+  'https://raw.githubusercontent.com/jwchau/jwchau.github.io/23270ab1c2c916ad0563c9b5fc94260021acee7d/images/smile.svg',
+  'https://raw.githubusercontent.com/jwchau/jwchau.github.io/23270ab1c2c916ad0563c9b5fc94260021acee7d/images/github.svg',
 ]
+
 const socials = Objectify(names, urls, svgs)
 
 
