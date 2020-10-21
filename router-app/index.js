@@ -1,5 +1,5 @@
 const Router = require('./router')
-const {links, samples} = require('./assets/links')
+const {socials, samples} = require('./assets/links')
 
 /**
  * Example of how router can be used in an application
@@ -16,7 +16,7 @@ function handler(req) {
     return new Response(body, init)
 }
 
-class LinksTransformer {
+class linksInserter {
     constructor(links) {
         this.urls = links
     }
@@ -28,7 +28,6 @@ class LinksTransformer {
     }
 }
 
-
 class imageRewriter {
     constructor(dest, desc) {
         this.dest = dest
@@ -36,10 +35,41 @@ class imageRewriter {
     }
 
     element(element) {
-        element.setAttribute('src', dest)
-        element.setInnerContent(desc)
+        element.setAttribute('src', this.dest)
+        element.setInnerContent(this.desc)
     }
 }
+
+class imageInserter {
+    constructor(dest, desc) {
+        this.dest = dest
+        this.desc = desc
+    }
+
+    element(element) {
+        element.append(
+            `<img id='avatar' src="${this.dest}">${this.desc}</a>`, {html: true}
+        )
+    }
+}
+
+class h1Rewriter {
+    constructor(content) {
+        this.content = content
+    }
+
+    element(element) {
+        element.setInnerContent(this.content)
+    }
+}
+
+class removeStyle {
+    element(element) {
+        element.removeAttribute('style')
+    }
+}
+
+// #FEFCBF, #FAF089
 
 async function handleRequest(req) {
     const r = new Router()
@@ -49,8 +79,15 @@ async function handleRequest(req) {
     r.get('/', () => fetch('https://static-links-page.signalnerve.workers.dev'))
 
     const rewriter = new HTMLRewriter()
-        .on('div#links', new LinksTransformer(samples))
-        // .on('img', imageRewriter)
+        .on('div#links', new linksInserter(samples))
+        .on('div#profile', new removeStyle())
+        .on('img#avatar', new imageRewriter('https://john-chau.com/face.png', 'Me'))
+        .on('h1#name', new h1Rewriter('John Chau'))
+        .on('div#social', new removeStyle())
+        .on('div#social', new linksInserter(socials))
+        
+        // .on('div#profile', new imageInserter('./assets/img/face.png', 'Me'))
+        
 
     const resp = await r.route(req)
     return rewriter.transform(resp)

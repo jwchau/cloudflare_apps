@@ -1,24 +1,18 @@
-// Link Object
-class Link {
-  constructor(name, url) {
-    this.name = name
-    this.url = url
-  }
+function Objectify(...arr) {
+  if (arr.length < 2 && arr[0].length !== arr[1].length) return []
 
-  static zip(names, urls) {
-    if (names.length !== urls.length) return []
-
-    const linkObjects = []
-    for (let i = 0; i < names.length; i++) {
-      linkObjects.push(new Link(names[i], urls[i]))
+  const pojos = []
+  for (let i = 0; i < arr[0].length; i++) {
+    const curr = {}
+    for (let j = 0; j < arr.length; j++) {
+      if (j === 0) curr['name'] = arr[j][i]
+      else if (j === 1) curr['url'] = arr[j][i]
+      else if (j === 2) curr['svg'] = arr[j][i]
     }
-
-    return linkObjects
+    pojos.push({...curr})
   }
 
-  toString() {
-    return this.name + ' => ' + this.url
-  }
+  return pojos
 }
 
 // social seed
@@ -34,7 +28,13 @@ let urls = [
   'https://john-chau.com',
   'https://github.com/jwchau',
 ]
-const socials = Link.zip(names, urls)
+let svgs = [
+  './assets/icons/cloudflare.svg',
+  './assets/icons/linkedin.svg',
+  './assets/icons/smile.svg',
+  './assets/icons/github.svg',
+]
+const socials = Objectify(names, urls, svgs)
 
 
 // sample seed
@@ -48,7 +48,7 @@ urls = [
   'https://anothersampleurl.com',
   'https://afinalsampleurl.com',
 ]
-const samples = Link.zip(names, urls)
+const samples = Objectify(names, urls)
 
 module.exports = {
   socials,
