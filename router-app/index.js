@@ -16,18 +16,30 @@ function handler(req) {
     return new Response(body, init)
 }
 
-const urlRewriter = {
-    element: (element) => {
-        element.setAttribute('href', 'https://workers.cloudflare.com')
-        element.setInnerContent('Return to Cloudflare Workers')
-    },
+class LinksTransformer {
+    constructor(links) {
+        this.links = links
+    }
+
+    async element(element) {
+        for (let i = 0; i < links.length; i++) {
+            console.log('count me:', i)
+            element.append(`<a href="${links[i].url}">${links[i].name}</a>`, { html: true })
+        }
+    }
 }
 
-const urlRewriter = {
-    element: (element) => {
-        element.setAttribute('href', 'https://workers.cloudflare.com')
-        element.setInnerContent('Return to Cloudflare Workers')
-    },
+
+class imageRewriter {
+    constructor(dest, desc) {
+        this.dest = dest
+        this.desc = desc
+    }
+
+    element(element) {
+        element.setAttribute('src', dest)
+        element.setInnerContent(desc)
+    }
 }
 
 async function handleRequest(req) {
@@ -37,8 +49,10 @@ async function handleRequest(req) {
     r.get('/links', req => handler(req))
     r.get('/', () => fetch('https://static-links-page.signalnerve.workers.dev'))
 
+    const rewriter = new HTMLRewriter()
+        .on('div#links', new LinksTransformer(links))
+        // .on('img', imageRewriter)
 
-    console.log('request finish')
     const resp = await r.route(req)
-    return resp
+    return rewriter.transform(resp)
 }

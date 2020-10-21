@@ -23,14 +23,14 @@ class Link {
 
 // seeds
 const names = [
-  'orange',
-  'volleyball',
-  'league',
-  'food',
+  'Worker',
+  'LinkedIn',
+  'Personal Site',
+  'Github',
 ]
 
 const urls = [
-  'https://fakesite123.com',
+  'https://links-app.jwchau.workers.dev/',
   'https://linkedin.com/in/jwchau',
   'https://john-chau.com',
   'https://github.com/jwchau',
